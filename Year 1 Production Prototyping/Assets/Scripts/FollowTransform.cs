@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowTransform : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
+    [SerializeField] private float lerpRate;
+    [SerializeField] private float slerpRate;
 
     [Header("Follow Parameters")]
     [SerializeField] private bool isFollowingPosition;
@@ -18,7 +20,15 @@ public class FollowTransform : MonoBehaviour
     {
         if (isFollowingPosition)
         {
-            FollowPosition();
+            if (!isLerpingPosition)
+            {
+                FollowPosition();
+            }
+            
+            else
+            {
+                FollowPositionLerp();
+            }
         }
 
         if (isFollowingRotation)
@@ -32,8 +42,20 @@ public class FollowTransform : MonoBehaviour
         transform.position = targetTransform.position;
     }
 
+    private void FollowPositionLerp()
+    {
+        Vector3 lerpPosition = targetTransform.position;
+        lerpPosition.y = Mathf.Lerp(transform.position.y, targetTransform.position.y, lerpRate * Time.deltaTime);
+        transform.position = lerpPosition;
+    }
+
     private void FollowRotation()
     {
         transform.rotation = targetTransform.rotation;
+    }
+
+    private void FollowRotationSlerp()
+    {
+
     }
 }
