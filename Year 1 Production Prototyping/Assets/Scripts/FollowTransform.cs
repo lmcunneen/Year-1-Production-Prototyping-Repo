@@ -5,9 +5,14 @@ using UnityEngine;
 public class FollowTransform : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
+
     [Header("Follow Parameters")]
     [SerializeField] private bool isFollowingPosition;
     [SerializeField] private bool isFollowingRotation;
+
+    [Header("Lerp Parameters")]
+    [SerializeField] private bool isLerpingPosition;
+    [SerializeField] private bool isSlerpingRotation;
 
     void Update()
     {
