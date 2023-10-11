@@ -9,6 +9,7 @@ public class TerminalLogic : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject cameraHolder;
     [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject terminalExitText;
 
     [Header("Terminal Parameters")]
     [SerializeField] private Text terminalText;
@@ -46,6 +47,7 @@ public class TerminalLogic : MonoBehaviour
         cameraHolder.transform.rotation = terminalCameraPosition.rotation;
 
         crosshair.SetActive(false);
+        terminalExitText.SetActive(true);
 
         isActive = true;
     }
@@ -58,6 +60,7 @@ public class TerminalLogic : MonoBehaviour
         cameraHolder.GetComponent<PlayerCamera>().enabled = true;
 
         crosshair.SetActive(true);
+        terminalExitText.SetActive(false);
 
         isActive = false;
 

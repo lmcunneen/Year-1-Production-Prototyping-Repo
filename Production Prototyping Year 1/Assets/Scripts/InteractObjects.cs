@@ -56,12 +56,16 @@ public class InteractObjects : MonoBehaviour
             {
                 //Debug.Log("No Raycast Hit");
                 crosshair.color = Color.white;
+
+                canInteract = false;
             }
         }
 
         else
         {
             crosshair.color = Color.white;
+
+            canInteract = false;
         }
     }
 
@@ -69,9 +73,12 @@ public class InteractObjects : MonoBehaviour
     {
         var interactable = hitData.collider.gameObject.GetComponent<Interactable>();
 
-        if (interactable.enabled == true)
+        if (interactable != null)
         {
-            interactable.InteractSuccess();
+            if (interactable.enabled == true)
+            {
+                interactable.InteractSuccess();
+            }
         }
     }
 }
