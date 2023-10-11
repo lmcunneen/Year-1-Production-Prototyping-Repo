@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class HoldableObject : MonoBehaviour
 {
+    [Header("Hold Object Parameters")]
     [SerializeField] private Transform holdObjectTransform;
+    [SerializeField] private float heldObjectLerpRate;
 
     private KeyCode interactKeyReference;
     private GameObject interactObjectsHolderReference;
@@ -41,8 +43,9 @@ public class HoldableObject : MonoBehaviour
 
     private void HoldObject()
     {
-        transform.position = holdObjectTransform.position;
-        //transform.rotation = holdObjectTransform.rotation;
+        transform.position = Vector3.Lerp(transform.position, holdObjectTransform.position, heldObjectLerpRate * Time.deltaTime);
+
+        //Should also find out how to make relative rotations static also
     }
 
     private void StopHolding()
