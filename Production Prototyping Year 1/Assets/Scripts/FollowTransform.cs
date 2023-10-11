@@ -13,21 +13,21 @@ public class FollowTransform : MonoBehaviour
     [SerializeField] private bool isFollowingRotation;
 
     [Header("Lerp Parameters")]
-    [SerializeField] private bool isLerpingPosition;
+    [SerializeField] private bool isLerpingPositionYAxis;
     [SerializeField] private bool isSlerpingRotation;
 
     void Update()
     {
         if (isFollowingPosition)
         {
-            if (!isLerpingPosition)
+            if (!isLerpingPositionYAxis)
             {
                 FollowPosition();
             }
             
             else
             {
-                FollowPositionLerp();
+                FollowPositionLerpAxisY();
             }
         }
 
@@ -42,7 +42,7 @@ public class FollowTransform : MonoBehaviour
         transform.position = targetTransform.position;
     }
 
-    private void FollowPositionLerp()
+    private void FollowPositionLerpAxisY()
     {
         Vector3 lerpPosition = targetTransform.position;
         lerpPosition.y = Mathf.Lerp(transform.position.y, targetTransform.position.y, lerpRate * Time.deltaTime);

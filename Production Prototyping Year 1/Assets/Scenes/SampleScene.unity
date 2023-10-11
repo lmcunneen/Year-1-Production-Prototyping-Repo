@@ -274,7 +274,7 @@ MonoBehaviour:
   slerpRate: 0
   isFollowingPosition: 1
   isFollowingRotation: 0
-  isLerpingPosition: 1
+  isLerpingPositionYAxis: 1
   isSlerpingRotation: 0
 --- !u!4 &269771852
 Transform:
@@ -289,6 +289,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
+  - {fileID: 1165551000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -750,7 +751,7 @@ MonoBehaviour:
   slerpRate: 0
   isFollowingPosition: 0
   isFollowingRotation: 1
-  isLerpingPosition: 0
+  isLerpingPositionYAxis: 0
   isSlerpingRotation: 0
 --- !u!1 &632737395
 GameObject:
@@ -1426,8 +1427,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165551000}
-  - component: {fileID: 1165551002}
-  - component: {fileID: 1165551001}
   m_Layer: 0
   m_Name: HoldObjectPosition
   m_TagString: Untagged
@@ -1443,47 +1442,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165550999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.7609997}
+  m_LocalPosition: {x: -0.0071206116, y: 0.001999855, z: 1.642869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1992415957}
-  m_RootOrder: 0
+  m_Father: {fileID: 269771852}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1165551001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165550999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec81710ec58df34db9110c1ddaadac8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTransform: {fileID: 269771852}
-  lerpRate: 0
-  slerpRate: 0
-  isFollowingPosition: 0
-  isFollowingRotation: 1
-  isLerpingPosition: 0
-  isSlerpingRotation: 0
---- !u!114 &1165551002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165550999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd47cd2bbf16754a9a02ddd2fb3c4cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactKeyCode: 0
-  crosshair: {fileID: 395624369}
-  objectGrabbingDistance: 2
 --- !u!1 &1453894654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,7 +2047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c00bb0d58734c4b811e095cfa1f6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdObjectPosition: {fileID: 1165551000}
+  holdObjectTransform: {fileID: 1165551000}
 --- !u!114 &1693120028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2223,8 +2188,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.5079999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1165551000}
+  m_Children: []
   m_Father: {fileID: 848882124}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2260,7 +2224,7 @@ MonoBehaviour:
   slerpRate: 0
   isFollowingPosition: 0
   isFollowingRotation: 1
-  isLerpingPosition: 0
+  isLerpingPositionYAxis: 0
   isSlerpingRotation: 0
 --- !u!1 &2041297837
 GameObject:

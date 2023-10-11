@@ -16,6 +16,8 @@ public class TerminalLogic : MonoBehaviour
     [SerializeField] private Transform terminalCameraPosition;
     [SerializeField] private string correctTerminalInput;
 
+    private GameObject interactObjectsHolderReference;
+    
     private bool isActive = false;
     
     // Start is called before the first frame update
@@ -37,7 +39,7 @@ public class TerminalLogic : MonoBehaviour
         }
     }
 
-    public void ActivateTerminal()
+    public void ActivateTerminal(GameObject interactObjectsHolder)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
 
@@ -48,6 +50,8 @@ public class TerminalLogic : MonoBehaviour
 
         crosshair.SetActive(false);
         terminalExitText.SetActive(true);
+
+        interactObjectsHolderReference = interactObjectsHolder;
 
         StartCoroutine(WaitBeforeActivatingInput());
     }
@@ -61,6 +65,8 @@ public class TerminalLogic : MonoBehaviour
 
         crosshair.SetActive(true);
         terminalExitText.SetActive(false);
+
+        interactObjectsHolderReference.GetComponent<InteractObjects>().DetectionValidator(true);
 
         isActive = false;
 

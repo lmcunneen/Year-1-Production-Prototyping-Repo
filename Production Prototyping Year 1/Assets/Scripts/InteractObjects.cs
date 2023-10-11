@@ -12,6 +12,7 @@ public class InteractObjects : MonoBehaviour
     [SerializeField] private float objectGrabbingDistance;
 
     private RaycastHit hitData;
+    private bool detectionStateReference = true;
     private bool canInteract = false;
     
     // Start is called before the first frame update
@@ -23,14 +24,23 @@ public class InteractObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectInteractableObject();
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canInteract || Input.GetKeyDown(interactKeyCode) && canInteract)
+        if (detectionStateReference)
         {
-            InteractWithObject();
+            DetectInteractableObject();
+
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canInteract || Input.GetKeyDown(interactKeyCode) && canInteract)
+            {
+                InteractWithObject();
+            }
         }
     }
 
+    public void DetectionValidator(bool detectionState)
+    {
+        //Prevents intiating interaction with an object you are still currently interacting with
+        detectionStateReference = detectionState;
+    }
+    
     void DetectInteractableObject()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitData))
@@ -78,7 +88,7 @@ public class InteractObjects : MonoBehaviour
         {
             if (interactable.enabled == true)
             {
-                interactable.InteractSuccess(interactKeyCode);
+                interactable.InteractSuccess(interactKeyCode, this.gameObject);
             }
         }
     }

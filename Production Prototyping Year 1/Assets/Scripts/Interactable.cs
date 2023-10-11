@@ -17,16 +17,18 @@ public class Interactable : MonoBehaviour
         
     }
 
-    public void InteractSuccess(KeyCode interactKey)
+    public void InteractSuccess(KeyCode interactKey, GameObject interactObjectsHolder)
     {
         if (objectType == "IsHoldable")
         {
-            GetComponent<HoldableObject>().StartHolding(interactKey);
+            GetComponent<HoldableObject>().StartHolding(interactKey, interactObjectsHolder);
+            interactObjectsHolder.GetComponent<InteractObjects>().DetectionValidator(false);
         }
 
         else if (objectType == "IsTerminal")
         {
-            GetComponent<TerminalLogic>().ActivateTerminal();
+            GetComponent<TerminalLogic>().ActivateTerminal(interactObjectsHolder);
+            interactObjectsHolder.GetComponent<InteractObjects>().DetectionValidator(false);
         }
     }
 }
