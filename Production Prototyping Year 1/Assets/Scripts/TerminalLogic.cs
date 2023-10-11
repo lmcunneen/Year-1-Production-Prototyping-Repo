@@ -49,7 +49,7 @@ public class TerminalLogic : MonoBehaviour
         crosshair.SetActive(false);
         terminalExitText.SetActive(true);
 
-        isActive = true;
+        StartCoroutine(WaitBeforeActivatingInput());
     }
 
     public void DeactivateTerminal(bool isLocked)
@@ -106,6 +106,12 @@ public class TerminalLogic : MonoBehaviour
         terminalText.text = terminalText.text.Remove(terminalText.text.Length - 2);
     }
 
+    IEnumerator WaitBeforeActivatingInput()
+    {
+        //Since you can interact with a key also, this prevents that same interact key being typed into the terminal upon interaction
+        yield return new WaitForEndOfFrame();
+        isActive = true;
+    }    
     IEnumerator SuccessfulInput()
     {
         terminalText.color = Color.green;

@@ -17,11 +17,11 @@ public class Interactable : MonoBehaviour
         
     }
 
-    public void InteractSuccess()
+    public void InteractSuccess(KeyCode interactKey)
     {
         if (objectType == "IsHoldable")
         {
-            //Run holding logic in other script
+            GetComponent<HoldableObject>().StartHolding(interactKey);
         }
 
         else if (objectType == "IsTerminal")

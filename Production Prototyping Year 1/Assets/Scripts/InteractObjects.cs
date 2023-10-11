@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InteractObjects : MonoBehaviour
 {
+    [SerializeField] private KeyCode interactKeyCode;
     [SerializeField] private Image crosshair;
 
     [Header("Raycast Properties")]
@@ -24,7 +25,7 @@ public class InteractObjects : MonoBehaviour
     {
         DetectInteractableObject();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canInteract)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canInteract || Input.GetKeyDown(interactKeyCode) && canInteract)
         {
             InteractWithObject();
         }
@@ -77,7 +78,7 @@ public class InteractObjects : MonoBehaviour
         {
             if (interactable.enabled == true)
             {
-                interactable.InteractSuccess();
+                interactable.InteractSuccess(interactKeyCode);
             }
         }
     }
