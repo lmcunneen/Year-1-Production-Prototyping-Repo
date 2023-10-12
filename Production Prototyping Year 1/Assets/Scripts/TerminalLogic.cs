@@ -121,6 +121,7 @@ public class TerminalLogic : MonoBehaviour
     IEnumerator SuccessfulInput()
     {
         terminalText.color = Color.green;
+        isActive = false;
         yield return new WaitForSeconds(1f);
         DeactivateTerminal(true);
     }
