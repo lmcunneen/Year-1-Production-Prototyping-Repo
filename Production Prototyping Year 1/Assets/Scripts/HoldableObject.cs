@@ -38,14 +38,20 @@ public class HoldableObject : MonoBehaviour
         interactObjectsHolderReference = interactObjectsHolder;
 
         objectRigidbody.useGravity = false;
+
+        holdObjectTransform.rotation = transform.rotation;
+
         isHolding = true;
     }
 
     private void HoldObject()
     {
+        //Vector3 newPosition = Vector3.Lerp(transform.position, holdObjectTransform.position, heldObjectLerpRate * Time.deltaTime);
+        //objectRigidbody.MovePosition(newPosition);
+
         transform.position = Vector3.Lerp(transform.position, holdObjectTransform.position, heldObjectLerpRate * Time.deltaTime);
 
-        //Should also find out how to make relative rotations static also
+        transform.rotation = holdObjectTransform.rotation;
     }
 
     private void StopHolding()
