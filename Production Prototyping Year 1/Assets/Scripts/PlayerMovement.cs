@@ -43,7 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        MovePlayer();
+        if (GroundCheck())
+        {
+            MovePlayer();
+        }
     }
 
     void GetInput()
@@ -57,5 +60,19 @@ public class PlayerMovement : MonoBehaviour
         movementDirection = playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
 
         playerRigidbody.AddForce(movementDirection.normalized * movementSpeedCalc, ForceMode.Force);
+    }
+
+    bool GroundCheck()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit groundHitData))
+        {
+            if (groundHitData.distance <= 0.05f && groundHitData.collider.gameObject.layer == 3)
+            {
+                //Debug.Log("Ground Check True");
+                return true;
+            }
+        }
+        Debug.Log("Ground Check False");
+        return false;
     }
 }
