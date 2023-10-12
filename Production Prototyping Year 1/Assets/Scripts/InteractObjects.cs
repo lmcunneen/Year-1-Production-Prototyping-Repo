@@ -61,6 +61,13 @@ public class InteractObjects : MonoBehaviour
 
                     canInteract = true;
                 }
+
+                else if (hitData.collider.gameObject.tag == "IsShadow")
+                {
+                    crosshair.color = Color.red;
+
+                    canInteract = true;
+                }
             }
 
             else

@@ -30,5 +30,11 @@ public class Interactable : MonoBehaviour
             GetComponent<TerminalLogic>().ActivateTerminal(interactObjectsHolder);
             interactObjectsHolder.GetComponent<InteractObjects>().DetectionValidator(false);
         }
+
+        else if (objectType == "IsShadow")
+        {
+            GetComponent<ShadowPuzzle>().RotationCheck(interactObjectsHolder);
+            interactObjectsHolder.GetComponent<InteractObjects>().DetectionValidator(false);
+        }
     }
 }
