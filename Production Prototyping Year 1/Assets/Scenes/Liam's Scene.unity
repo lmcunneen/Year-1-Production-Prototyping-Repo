@@ -563,6 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOrientation: {fileID: 1097855061}
   mouseSensitivity: 10
+  isHoldingReference: 0
 --- !u!114 &269771851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2172,8 +2173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c00bb0d58734c4b811e095cfa1f6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraHolder: {fileID: 269771849}
   holdObjectTransform: {fileID: 1165551000}
-  heldObjectLerpRate: 10
+  heldObjectLerpRate: 20
 --- !u!114 &1693120028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2288,6 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c00bb0d58734c4b811e095cfa1f6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraHolder: {fileID: 0}
   holdObjectTransform: {fileID: 1165551000}
   heldObjectLerpRate: 10
 --- !u!114 &1778709286

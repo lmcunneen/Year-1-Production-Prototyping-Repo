@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HoldableObject : MonoBehaviour
 {
+    [SerializeField] private GameObject cameraHolder;
+    
     [Header("Hold Object Parameters")]
     [SerializeField] private Transform holdObjectTransform;
     [SerializeField] private float heldObjectLerpRate;
@@ -23,7 +25,10 @@ public class HoldableObject : MonoBehaviour
     {
         if (isHolding)
         {
-            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0))
+            //Find better solution to clipping problem, as it can activate stop holding with more quick turns. Possibly a Line of sight check?
+            float objectHoldDistance = Vector3.Distance(holdObjectTransform.position, transform.position);
+
+            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0) || objectHoldDistance >= 1f)
             {
                 StopHolding();
             }
@@ -47,6 +52,8 @@ public class HoldableObject : MonoBehaviour
 
         holdObjectTransform.rotation = transform.rotation;
 
+        cameraHolder.GetComponent<PlayerCamera>().isHoldingReference = true;
+
         isHolding = true;
     }
 
@@ -64,6 +71,8 @@ public class HoldableObject : MonoBehaviour
     private void StopHolding()
     {
         objectRigidbody.useGravity = true;
+
+        cameraHolder.GetComponent<PlayerCamera>().isHoldingReference = false;
 
         StartCoroutine(ReactivateInteractObjects());
         isHolding = false;
