@@ -23,12 +23,18 @@ public class HoldableObject : MonoBehaviour
     {
         if (isHolding)
         {
-            HoldObject();
-
             if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0))
             {
                 StopHolding();
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isHolding)
+        {
+            HoldObject();
         }
     }
 
@@ -50,8 +56,9 @@ public class HoldableObject : MonoBehaviour
         //objectRigidbody.MovePosition(newPosition);
 
         transform.position = Vector3.Lerp(transform.position, holdObjectTransform.position, heldObjectLerpRate * Time.deltaTime);
-
         transform.rotation = holdObjectTransform.rotation;
+
+        objectRigidbody.velocity = new Vector3(0, 0, 0);
     }
 
     private void StopHolding()
