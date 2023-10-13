@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, -transform.up, out RaycastHit groundHitData))
         {
-            if (groundHitData.distance <= 0.05f && groundHitData.collider.gameObject.layer == 3)
+            if (groundHitData.distance <= 0.2f)
             {
                 //Debug.Log("Ground Check True");
                 return true;
