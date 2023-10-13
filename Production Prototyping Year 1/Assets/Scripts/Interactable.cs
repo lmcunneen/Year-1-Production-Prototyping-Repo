@@ -33,7 +33,7 @@ public class Interactable : MonoBehaviour
 
         else if (objectType == "IsShadow")
         {
-            GetComponent<ShadowPuzzle>().RotationCheck(interactObjectsHolder);
+            GetComponent<ShadowPuzzle>().ActivateShadowPuzzle(interactObjectsHolder);
             interactObjectsHolder.GetComponent<InteractObjects>().DetectionValidator(false);
         }
     }

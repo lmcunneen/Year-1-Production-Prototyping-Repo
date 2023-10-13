@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
                 return true;
             }
         }
-        Debug.Log("Ground Check False");
+        //Debug.Log("Ground Check False");
         return false;
     }
 }

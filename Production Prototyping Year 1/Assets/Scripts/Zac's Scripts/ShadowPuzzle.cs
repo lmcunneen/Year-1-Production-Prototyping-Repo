@@ -11,6 +11,16 @@ public class ShadowPuzzle : MonoBehaviour
     public Transform correctRotation;
     public Quaternion correctRotationQuaternion;
 
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject cameraHolder;
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject exitText;
+    [SerializeField] private Transform shadowCameraPosition;
+
+    private GameObject interactObjectsHolderReference;
+
+    private bool isActive = false;
+
     void Start()
     {
         rotation = shape1.GetComponent<Transform>();
@@ -21,14 +31,52 @@ public class ShadowPuzzle : MonoBehaviour
     }
     void Update()
     {
+        if (isActive)
+        {
+            RotateShadow();
+        }
+        
+    }
+
+    public void ActivateShadowPuzzle(GameObject interactObjectsHolder)
+    {
+        player.GetComponent<ControllerMovement>().enabled = false;
+
+        cameraHolder.GetComponent<FollowTransform>().enabled = false;
+        cameraHolder.GetComponent<PlayerCamera>().enabled = false;
+        cameraHolder.transform.position = shadowCameraPosition.position;
+        cameraHolder.transform.rotation = shadowCameraPosition.rotation;
+
+        crosshair.SetActive(false);
+        exitText.SetActive(true);
+
+        interactObjectsHolderReference = interactObjectsHolder;
+
+        StartCoroutine(BeginShadowPuzzle());
+    }
+
+    public void RotateShadow()
+    {
+        Debug.Log("Entered shadowPuzzle");
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            Debug.Log("Rotate right");
+        }
+
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            Debug.Log("Rotate left");
+        }
+
         if (rotation.rotation.y == correctRotation.rotation.y)
         {
             Debug.Log("Object in correct spot");
         }
     }
 
-    public void RotationCheck(GameObject interactObjectsHolder)
+    IEnumerator BeginShadowPuzzle()
     {
-
+        yield return new WaitForSeconds(.5f);
+        isActive = true;
     }
 }
