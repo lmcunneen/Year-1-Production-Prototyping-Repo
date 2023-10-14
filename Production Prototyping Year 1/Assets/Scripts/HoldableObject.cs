@@ -10,12 +10,18 @@ public class HoldableObject : MonoBehaviour
     [SerializeField] private Transform holdObjectTransform;
     [SerializeField] private float heldObjectLerpRate;
 
+    [Header("Raycast Parameters")]
+    [SerializeField] private Transform playerCapsule;
+    [SerializeField] private LayerMask holdObjectRaycastLayerMask;
+    [SerializeField] private LayerMask playerRaycastLayerMask;
+
     private KeyCode interactKeyReference;
     private GameObject interactObjectsHolderReference;
 
     private Rigidbody objectRigidbody;
     private bool isHolding;
-    
+    private float objectHoldDistance;
+
     void Start()
     {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -25,10 +31,18 @@ public class HoldableObject : MonoBehaviour
     {
         if (isHolding)
         {
-            //Find better solution to clipping problem, as it can activate stop holding with more quick turns. Possibly a Line of sight check?
-            float objectHoldDistance = Vector3.Distance(holdObjectTransform.position, transform.position);
+            // The LOSValidator will also do a raycast to the player capsule, but will need to be troubleshooted in order to work
+            if (LOSValidator(holdObjectTransform, holdObjectRaycastLayerMask))
+            {
+                objectHoldDistance = 0f;
+            }
 
-            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0) || objectHoldDistance >= 1f)
+            else
+            {
+                objectHoldDistance = Vector3.Distance(holdObjectTransform.position, transform.position);
+            }
+
+            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0) || objectHoldDistance >= 0.5f)
             {
                 StopHolding();
             }
@@ -66,6 +80,24 @@ public class HoldableObject : MonoBehaviour
         transform.rotation = holdObjectTransform.rotation;
 
         objectRigidbody.velocity = new Vector3(0, 0, 0);
+    }
+
+    private bool LOSValidator(Transform raycastTransform, LayerMask raycastLayerMask)
+    {   
+        Vector2 raycastDirection = (raycastTransform.position - transform.position).normalized;
+
+        Physics.Raycast(transform.position, raycastDirection, out RaycastHit LOSData, 9999f, raycastLayerMask, QueryTriggerInteraction.Ignore);
+        Debug.DrawRay(transform.position, raycastDirection, Color.white);
+
+        if (LOSData.collider != null)
+        {
+            Debug.Log(LOSData.collider.gameObject.name);
+
+            return false;
+        }
+
+        //Debug.Log("Raycast hit something else!");
+        return true;
     }
 
     private void StopHolding()
