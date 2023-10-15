@@ -86,12 +86,12 @@ public class HoldableObject : MonoBehaviour
     {   
         Vector2 raycastDirection = (raycastTransform.position - transform.position).normalized;
 
-        Physics.Raycast(transform.position, raycastDirection, out RaycastHit LOSData, 9999f, raycastLayerMask, QueryTriggerInteraction.Ignore);
+        Physics.Raycast(transform.position, raycastDirection, out RaycastHit LOSData, 999f, raycastLayerMask, QueryTriggerInteraction.Ignore);
         Debug.DrawRay(transform.position, raycastDirection, Color.white);
 
         if (LOSData.collider != null)
         {
-            Debug.DrawRay(transform.position, LOSData.point, Color.red);
+            Debug.DrawLine(transform.position, LOSData.point, Color.red);
 
             Debug.Log(LOSData.collider.gameObject.name);
 
