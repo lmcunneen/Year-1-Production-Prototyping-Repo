@@ -42,7 +42,7 @@ public class HoldableObject : MonoBehaviour
                 objectHoldDistance = Vector3.Distance(holdObjectTransform.position, transform.position);
             }
 
-            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0) || objectHoldDistance >= 0.5f)
+            if (Input.GetKeyDown(interactKeyReference) || Input.GetKeyDown(KeyCode.Mouse0) || objectHoldDistance >= 0.75f)
             {
                 StopHolding();
             }
@@ -91,12 +91,13 @@ public class HoldableObject : MonoBehaviour
 
         if (LOSData.collider != null)
         {
+            Debug.DrawRay(transform.position, LOSData.point, Color.red);
+
             Debug.Log(LOSData.collider.gameObject.name);
 
             return false;
         }
 
-        //Debug.Log("Raycast hit something else!");
         return true;
     }
 
