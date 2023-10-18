@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private Transform playerOrientation;
     [SerializeField] private float movementSpeedBase;
     [SerializeField] private KeyCode crouchKey;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeedCalc;
     private float horizontalInput;
     private float verticalInput;
+    private bool isCrouching = false;
 
     void Start()
     {
@@ -30,11 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(crouchKey))
         {
+            isCrouching = true;
             transform.localScale = playerScaleCrouching;
             movementSpeedCalc = movementSpeedBase * 0.6f;
         }
 
-        else
+        else if (!Physics.Raycast(transform.position, Vector3.up, playerCollider.height * 0.6f))
         {
             transform.localScale = playerScaleBase;
             movementSpeedCalc = movementSpeedBase;

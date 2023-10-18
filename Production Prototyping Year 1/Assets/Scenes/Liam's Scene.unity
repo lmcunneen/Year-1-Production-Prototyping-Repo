@@ -2504,6 +2504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af01561fa6b3a1409d609f6d2a3d3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollider: {fileID: 596363512}
   playerOrientation: {fileID: 1097855061}
   movementSpeedBase: 20
   crouchKey: 99
